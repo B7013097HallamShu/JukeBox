@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace JukeBox
 {
-    public partial class Form1 : Form
+    public partial class JukeBox_frm : Form
     {
-        public Form1()
+        public JukeBox_frm()
         {
             InitializeComponent();
+        }
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
