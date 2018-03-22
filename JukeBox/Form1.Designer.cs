@@ -111,6 +111,7 @@
             this.About_txtBoxMenu.ReadOnly = true;
             this.About_txtBoxMenu.Size = new System.Drawing.Size(100, 39);
             this.About_txtBoxMenu.Text = "About";
+            this.About_txtBoxMenu.Click += new System.EventHandler(this.About_txtBoxMenu_Click);
             // 
             // ToolBar_MenuStrip
             // 
