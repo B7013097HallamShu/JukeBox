@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JukeBox_frm));
             this.label1 = new System.Windows.Forms.Label();
             this.GenreList_LstBox = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.GenreTitle_txtBox = new System.Windows.Forms.TextBox();
             this.Playing_txtBox = new System.Windows.Forms.TextBox();
             this.PlayList_LstBox = new System.Windows.Forms.ListBox();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
@@ -61,16 +61,16 @@
             this.GenreList_LstBox.Size = new System.Drawing.Size(369, 129);
             this.GenreList_LstBox.TabIndex = 1;
             // 
-            // textBox1
+            // GenreTitle_txtBox
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(148, 237);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(369, 31);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "General";
+            this.GenreTitle_txtBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.GenreTitle_txtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GenreTitle_txtBox.Location = new System.Drawing.Point(148, 237);
+            this.GenreTitle_txtBox.Name = "GenreTitle_txtBox";
+            this.GenreTitle_txtBox.ReadOnly = true;
+            this.GenreTitle_txtBox.Size = new System.Drawing.Size(369, 31);
+            this.GenreTitle_txtBox.TabIndex = 2;
+            this.GenreTitle_txtBox.Text = "General";
             // 
             // Playing_txtBox
             // 
@@ -92,10 +92,12 @@
             // 
             // hScrollBar1
             // 
+            this.hScrollBar1.LargeChange = 1;
             this.hScrollBar1.Location = new System.Drawing.Point(148, 388);
             this.hScrollBar1.Name = "hScrollBar1";
             this.hScrollBar1.Size = new System.Drawing.Size(369, 34);
             this.hScrollBar1.TabIndex = 7;
+            this.hScrollBar1.ValueChanged += new System.EventHandler(this.hScrollBar1_ValueChanged);
             // 
             // Setup_txtBoxMenu
             // 
@@ -137,7 +139,7 @@
             this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.PlayList_LstBox);
             this.Controls.Add(this.Playing_txtBox);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.GenreTitle_txtBox);
             this.Controls.Add(this.GenreList_LstBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ToolBar_MenuStrip);
@@ -145,6 +147,7 @@
             this.MainMenuStrip = this.ToolBar_MenuStrip;
             this.Name = "JukeBox_frm";
             this.Text = "My Juke Box v1.0";
+            this.Load += new System.EventHandler(this.JukeBox_frm_Load);
             this.ToolBar_MenuStrip.ResumeLayout(false);
             this.ToolBar_MenuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -156,7 +159,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox GenreList_LstBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox GenreTitle_txtBox;
         private System.Windows.Forms.TextBox Playing_txtBox;
         private System.Windows.Forms.ListBox PlayList_LstBox;
         private System.Windows.Forms.HScrollBar hScrollBar1;
