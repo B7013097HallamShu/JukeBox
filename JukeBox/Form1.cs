@@ -90,5 +90,13 @@ namespace JukeBox
         {
             Displaytext();
         }
+
+        private void GenreList_LstBox_DoubleClick(object sender, EventArgs e)
+        {
+            //Track selected put into playlist 
+            int TrackIndex = GenreList_LstBox.SelectedIndex;
+            string TrackSelected = GenreList_LstBox.Items[TrackIndex].ToString();
+            PlayList_LstBox.Items.Add(TrackSelected);
+        }
     }
    }

@@ -60,6 +60,7 @@
             this.GenreList_LstBox.Name = "GenreList_LstBox";
             this.GenreList_LstBox.Size = new System.Drawing.Size(369, 129);
             this.GenreList_LstBox.TabIndex = 1;
+            this.GenreList_LstBox.DoubleClick += new System.EventHandler(this.GenreList_LstBox_DoubleClick);
             // 
             // GenreTitle_txtBox
             // 
