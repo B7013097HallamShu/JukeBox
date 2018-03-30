@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JukeBox_frm));
             this.label1 = new System.Windows.Forms.Label();
             this.GenreList_LstBox = new System.Windows.Forms.ListBox();
@@ -38,7 +39,10 @@
             this.Setup_txtBoxMenu = new System.Windows.Forms.ToolStripTextBox();
             this.About_txtBoxMenu = new System.Windows.Forms.ToolStripTextBox();
             this.ToolBar_MenuStrip = new System.Windows.Forms.MenuStrip();
+            this.WinMediaPlay = new AxWMPLib.AxWindowsMediaPlayer();
+            this.TrackTime_Timer = new System.Windows.Forms.Timer(this.components);
             this.ToolBar_MenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WinMediaPlay)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -56,7 +60,7 @@
             // 
             this.GenreList_LstBox.FormattingEnabled = true;
             this.GenreList_LstBox.ItemHeight = 25;
-            this.GenreList_LstBox.Location = new System.Drawing.Point(148, 264);
+            this.GenreList_LstBox.Location = new System.Drawing.Point(170, 265);
             this.GenreList_LstBox.Name = "GenreList_LstBox";
             this.GenreList_LstBox.Size = new System.Drawing.Size(369, 129);
             this.GenreList_LstBox.TabIndex = 1;
@@ -66,7 +70,7 @@
             // 
             this.GenreTitle_txtBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.GenreTitle_txtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GenreTitle_txtBox.Location = new System.Drawing.Point(148, 237);
+            this.GenreTitle_txtBox.Location = new System.Drawing.Point(170, 237);
             this.GenreTitle_txtBox.Name = "GenreTitle_txtBox";
             this.GenreTitle_txtBox.ReadOnly = true;
             this.GenreTitle_txtBox.Size = new System.Drawing.Size(369, 31);
@@ -76,7 +80,7 @@
             // Playing_txtBox
             // 
             this.Playing_txtBox.BackColor = System.Drawing.Color.Lime;
-            this.Playing_txtBox.Location = new System.Drawing.Point(148, 435);
+            this.Playing_txtBox.Location = new System.Drawing.Point(170, 481);
             this.Playing_txtBox.Name = "Playing_txtBox";
             this.Playing_txtBox.ReadOnly = true;
             this.Playing_txtBox.Size = new System.Drawing.Size(369, 31);
@@ -86,7 +90,7 @@
             // 
             this.PlayList_LstBox.FormattingEnabled = true;
             this.PlayList_LstBox.ItemHeight = 25;
-            this.PlayList_LstBox.Location = new System.Drawing.Point(199, 498);
+            this.PlayList_LstBox.Location = new System.Drawing.Point(211, 556);
             this.PlayList_LstBox.Name = "PlayList_LstBox";
             this.PlayList_LstBox.Size = new System.Drawing.Size(287, 204);
             this.PlayList_LstBox.TabIndex = 4;
@@ -94,7 +98,7 @@
             // hScrollBar1
             // 
             this.hScrollBar1.LargeChange = 1;
-            this.hScrollBar1.Location = new System.Drawing.Point(148, 388);
+            this.hScrollBar1.Location = new System.Drawing.Point(170, 388);
             this.hScrollBar1.Name = "hScrollBar1";
             this.hScrollBar1.Size = new System.Drawing.Size(369, 34);
             this.hScrollBar1.TabIndex = 7;
@@ -123,11 +127,26 @@
             this.ToolBar_MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Setup_txtBoxMenu,
             this.About_txtBoxMenu});
-            this.ToolBar_MenuStrip.Location = new System.Drawing.Point(0, 895);
+            this.ToolBar_MenuStrip.Location = new System.Drawing.Point(0, 916);
             this.ToolBar_MenuStrip.Name = "ToolBar_MenuStrip";
-            this.ToolBar_MenuStrip.Size = new System.Drawing.Size(673, 43);
+            this.ToolBar_MenuStrip.Size = new System.Drawing.Size(701, 43);
             this.ToolBar_MenuStrip.TabIndex = 5;
             this.ToolBar_MenuStrip.Text = "menuStrip1";
+            // 
+            // WinMediaPlay
+            // 
+            this.WinMediaPlay.Enabled = true;
+            this.WinMediaPlay.Location = new System.Drawing.Point(12, 23);
+            this.WinMediaPlay.Name = "WinMediaPlay";
+            this.WinMediaPlay.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("WinMediaPlay.OcxState")));
+            this.WinMediaPlay.Size = new System.Drawing.Size(263, 69);
+            this.WinMediaPlay.TabIndex = 8;
+            this.WinMediaPlay.Visible = false;
+            this.WinMediaPlay.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.WinMediaPlay_PlayStateChange);
+            // 
+            // TrackTime_Timer
+            // 
+            this.TrackTime_Timer.Tick += new System.EventHandler(this.TrackTime_Timer_Tick);
             // 
             // JukeBox_frm
             // 
@@ -136,7 +155,8 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(673, 938);
+            this.ClientSize = new System.Drawing.Size(701, 959);
+            this.Controls.Add(this.WinMediaPlay);
             this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.PlayList_LstBox);
             this.Controls.Add(this.Playing_txtBox);
@@ -151,6 +171,7 @@
             this.Load += new System.EventHandler(this.JukeBox_frm_Load);
             this.ToolBar_MenuStrip.ResumeLayout(false);
             this.ToolBar_MenuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WinMediaPlay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,6 +188,8 @@
         private System.Windows.Forms.ToolStripTextBox Setup_txtBoxMenu;
         private System.Windows.Forms.ToolStripTextBox About_txtBoxMenu;
         private System.Windows.Forms.MenuStrip ToolBar_MenuStrip;
+        private AxWMPLib.AxWindowsMediaPlayer WinMediaPlay;
+        private System.Windows.Forms.Timer TrackTime_Timer;
     }
 }
 

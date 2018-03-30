@@ -19,7 +19,7 @@ namespace JukeBox
         }
         ListBox[] Media_Library;
         String[] GenreTitle;
-        
+        bool PlayingNow=false;
 
         private void toolStripTextBox1_Click(object sender, EventArgs e)
         {
@@ -96,7 +96,55 @@ namespace JukeBox
             //Track selected put into playlist 
             int TrackIndex = GenreList_LstBox.SelectedIndex;
             string TrackSelected = GenreList_LstBox.Items[TrackIndex].ToString();
-            PlayList_LstBox.Items.Add(TrackSelected);
+
+            if (PlayingNow == true )
+            {
+                PlayList_LstBox.Items.Add(TrackSelected);
+            }
+            else if(PlayingNow == false && PlayList_LstBox.Items.Count == 0)
+            {
+                Playing_txtBox.Text = TrackSelected;
+                String TrackPath = Directory.GetCurrentDirectory() + "\\Tracks\\";
+                WinMediaPlay.URL = TrackPath + TrackSelected;
+                WinMediaPlay.Ctlcontrols.play();
+
+                PlayingNow = true;
+            }           
         }
+
+        private void TrackTime_Timer_Tick(object sender, EventArgs e)
+        {
+            if (WinMediaPlay.playState == WMPLib.WMPPlayState.wmppsStopped)
+            {
+                TrackTime_Timer.Enabled = false;
+                NextSong();
+            }
+            else if(WinMediaPlay.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            {
+                PlayingNow = true;
+            }
+        }
+
+        private void WinMediaPlay_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
+        {
+            if (WinMediaPlay.playState == WMPLib.WMPPlayState.wmppsStopped)
+            {
+                PlayingNow = false;
+                TrackTime_Timer.Enabled = true;
+            }
+        }
+
+        private void NextSong()
+        {
+            Playing_txtBox.Text = PlayList_LstBox.Items[0].ToString();
+            PlayList_LstBox.Items.RemoveAt(0);
+
+           
+            String TrackPath = Directory.GetCurrentDirectory() + "\\Tracks\\";
+            WinMediaPlay.URL = TrackPath + Playing_txtBox.Text;
+            WinMediaPlay.Ctlcontrols.play();
+
+        }
+
     }
    }
